@@ -15,15 +15,15 @@ export class CommentsComponent {
   @Output() addNewReply = new EventEmitter();
   @Output() addPoints = new EventEmitter();
   @Output() decrease = new EventEmitter();
+  @Output() changeContent = new EventEmitter();
 
   nameToReply: string = '';
   id: number = 0;
-  replyId: number = 0;
+  editId: number = 0;
 
   selectedReplyID = 0;
 
-  selectedReplyChange(reply: any) {
-    console.log(reply);
+  sendReplyComment(reply: any) {
     if (this.selectedReplyID === reply.id) {
       this.selectedReplyID = 0;
     } else {
@@ -31,24 +31,27 @@ export class CommentsComponent {
     }
   }
 
-  handler(rep: any) {
-    console.log(rep);
-  }
-
-  reply(index: number, id: number) {
+  reply(reply: any) {
     let foundComment = this.allComments.find(
-      (comment) => id === comment.id && this.id !== index
+      (comment) => reply.id === comment.id && this.id !== reply.index
     );
     if (foundComment) {
-      this.id = index;
-    } else if (this.id === index) {
+      this.id = reply.index;
+    } else if (this.id === reply.index) {
       this.id = 0;
+    }
+  }
+
+  edit(edit: number) {
+    if (this.editId === edit) {
+      this.editId = 0;
+    } else {
+      this.editId = edit;
     }
   }
 
   addNewReplyfn(reply: any) {
     this.addNewReply.emit(reply);
-    console.log(reply);
   }
 
   addPointsUser(id: number) {
@@ -57,5 +60,10 @@ export class CommentsComponent {
 
   decreasePoints(id: number) {
     this.decrease.emit(id);
+  }
+
+  addChangedContent(changedInfoId: any) {
+    this.changeContent.emit(changedInfoId);
+    // this.edit(changedInfoId);
   }
 }

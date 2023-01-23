@@ -12,10 +12,12 @@ export class NewReplyComponent {
   @Input() currentUser: User = data.currentUser;
   @Input() sumOfAllComments: number = 0;
   @Input() id: number = 0;
-  @Input() replyId: number = 0;
+  @Input() userCommentId: number = 0;
+  @Input() commentIndex: number = 0;
 
   @Output() addNewReply = new EventEmitter<any>();
-  @Output() delete = new EventEmitter<any>();
+  @Output() deleteReplyComment = new EventEmitter();
+  @Output() deleteReplyReply = new EventEmitter();
 
   content: string = '';
   createdAt: string = '1 minutes ago';
@@ -42,6 +44,10 @@ export class NewReplyComponent {
       });
       this.content = '';
     }
-    this.delete.emit(1);
+    this.deleteReplyComment.emit({
+      index: this.commentIndex,
+      id: this.id,
+    });
+    this.deleteReplyReply.emit({ id: this.userCommentId });
   }
 }

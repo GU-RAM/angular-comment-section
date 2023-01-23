@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from '../../app.component';
 import data from '../../../assets/data/data.json';
 
@@ -10,6 +10,17 @@ import data from '../../../assets/data/data.json';
 export class EditReplyComponent {
   @Input() currentUser: User = data.currentUser;
   @Input() content: any;
+  @Input() userCommentId: number = 0;
 
-  ff() {}
+  @Output() renewContent = new EventEmitter();
+  @Output() editReply = new EventEmitter();
+
+  addRenewedContent() {
+    this.renewContent.emit({
+      content: this.content,
+      id: this.userCommentId,
+    });
+
+    this.editReply.emit(this.userCommentId);
+  }
 }

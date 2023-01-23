@@ -44,18 +44,21 @@ export class AppComponent {
   currentUser: User = data.currentUser;
   allComments: Comment[] = this.getComments();
   sumOfReplies: number = 0;
-  sumOfAllComments: number = 8;
+  sumOfAllComments: any = this.sumAllComments();
 
   addNewCommentHandler(newComment: Comment) {
     this.allComments.push(newComment);
-    localStorage.setItem('allComments', JSON.stringify(this.allComments));
+    this.updateLocalStorage();
+    this.sumOfAllComments = this.sumAllComments();
   }
 
   addNewReplyHandler(reply: any) {
+    console.log(reply);
     this.allComments
       .find((comment) => reply.id === comment.id)
       ?.replies.push(reply.reply);
-    localStorage.setItem('allComments', JSON.stringify(this.allComments));
+    this.updateLocalStorage();
+    this.sumOfAllComments = this.sumAllComments();
   }
 
   addPointsHandler(id: number) {
@@ -73,7 +76,7 @@ export class AppComponent {
     });
     if (comment) {
       comment.score++;
-      localStorage.setItem('allComments', JSON.stringify(this.allComments));
+      this.updateLocalStorage();
     }
   }
 
@@ -92,8 +95,27 @@ export class AppComponent {
     });
     if (comment?.score > 0) {
       comment.score--;
-      localStorage.setItem('allComments', JSON.stringify(this.allComments));
+      this.updateLocalStorage();
     }
+  }
+
+  addChangedContentHandler(changhedContentId: any) {
+    console.log('mari');
+    let comment: any;
+    this.allComments.forEach((c: any) => {
+      if (c.id === changhedContentId.id) {
+        comment = c;
+      } else if (c.replies.length) {
+        c.replies.forEach((r: any) => {
+          if (r.id === changhedContentId.id) {
+            comment = r;
+          }
+        });
+      }
+    });
+
+    comment.content = changhedContentId.content;
+    this.updateLocalStorage();
   }
 
   getComments() {
@@ -115,7 +137,7 @@ export class AppComponent {
   sumAllComments() {
     return this.allComments.reduce(
       (total, comment) => total + comment.replies.length + 1,
-      0
+      1
     );
   }
 }

@@ -15,6 +15,7 @@ export class CommentsVotingComponent {
   @Output() addPoints = new EventEmitter();
 
   increasePoints() {
+    console.log(this.id);
     this.addPoints.emit(this.id);
   }
 

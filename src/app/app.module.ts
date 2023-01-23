@@ -9,6 +9,7 @@ import { CommentsVotingComponent } from './comments/comments-voting/comments-vot
 import { NewCommentComponent } from './new-comment/new-comment.component';
 import { NewReplyComponent } from './comments/new-reply/new-reply.component';
 import { CommonModule } from '@angular/common';
+import { DeleteUserCommentComponent } from './comments/delete-user-comment/delete-user-comment.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { CommonModule } from '@angular/common';
     CommentsVotingComponent,
     NewCommentComponent,
     NewReplyComponent,
+    DeleteUserCommentComponent,
   ],
   imports: [BrowserModule, FormsModule, CommonModule],
   providers: [],

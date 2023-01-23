@@ -28,7 +28,7 @@
           <button
             class="old-comment-reply-btn"
             *ngIf="currentUser.username !== comment.user.username"
-            (click)="reply(i + 1, comment.id)"
+            (click)="reply({ index: i + 1, id: comment.id })"
           >
             <img src="../../assets/images/icon-reply.svg" alt="" />Reply
           </button>
@@ -44,12 +44,22 @@
           <button
             class="user-comment-edit-btn"
             *ngIf="currentUser.username === comment.user.username"
+            (click)="edit(comment.id)"
           >
             <img src="../../assets/images/icon-edit.svg" alt="Edit icon" />Edit
           </button>
         </div>
         <div class="old-comment-text">
-          {{ comment.content }}
+          <div *ngIf="editId !== comment.id">
+            {{ comment.content }}
+          </div>
+          <app-edit-reply
+            *ngIf="editId == comment.id"
+            [content]="comment.content"
+            [userCommentId]="comment.id"
+            (renewContent)="addChangedContent($event)"
+            (editReply)="edit($event)"
+          ></app-edit-reply>
         </div>
       </div>
     </div>
@@ -59,6 +69,9 @@
       [currentUser]="currentUser"
       [sumOfAllComments]="sumOfAllComments"
       [id]="comment.id"
+      [commentIndex]="i + 1"
+      (delete)="sendReplyComment($event)"
+      (deleteReplyComment)="reply($event)"
     ></app-new-reply>
 
     <div *ngIf="comment.replies.length > 0">
@@ -88,7 +101,7 @@
               <div class="old-comment-date">{{ reply.createdAt }}</div>
               <button
                 class="old-comment-reply-btn"
-                (click)="selectedReplyChange(reply)"
+                (click)="sendReplyComment(reply)"
                 *ngIf="currentUser.username !== reply.user.username"
               >
                 <img src="../../assets/images/icon-reply.svg" alt="" />Reply
@@ -105,6 +118,7 @@
               <button
                 class="user-comment-edit-btn"
                 *ngIf="currentUser.username === reply.user.username"
+                (click)="edit(reply.id)"
               >
                 <img
                   src="../../assets/images/icon-edit.svg"
@@ -112,17 +126,18 @@
                 />Edit
               </button>
             </div>
-            <!-- <app-edit-reply [content]="reply.content"></app-edit-reply> -->
             <div class="old-comment-text">
-              {{ reply.replyingTo }}{{ reply.content }}
+              <div *ngIf="editId !== reply.id">
+                {{ reply.content }}
+              </div>
+              <app-edit-reply
+                *ngIf="editId == reply.id"
+                [content]="reply.content"
+                [userCommentId]="reply.id"
+                (renewContent)="addChangedContent($event)"
+                (editReply)="edit($event)"
+              ></app-edit-reply>
             </div>
-            <!-- <div class="old-comment-text">
-              <textarea
-                class="edit-textarea"
-                [(ngModel)]="reply.content"
-              ></textarea>
-            </div>
-            <button class="update-comment-btn">UPDATE</button> -->
           </div>
         </div>
         <app-new-reply
@@ -131,8 +146,8 @@
           [currentUser]="currentUser"
           [sumOfAllComments]="sumOfAllComments"
           [id]="comment.id"
-          [replyId]="reply.id"
-          (delete)="handler($event)"
+          [userCommentId]="reply.id"
+          (deleteReplyReply)="sendReplyComment($event)"
         ></app-new-reply>
       </div>
     </div>
