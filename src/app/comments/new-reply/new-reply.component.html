@@ -1,0 +1,13 @@
+<div class="comments new-comment user-reply user-reply-width">
+  <img
+    [src]="'../../assets/' + currentUser.image.png"
+    alt=""
+    id="new-comment-img"
+  /><textarea
+    placeholder="Add a comment..."
+    class="reply-comment-content"
+    [(ngModel)]="content"
+  >
+  </textarea
+  ><button id="new-reply-send-btn" (click)="newReply()">SEND</button>
+</div>

@@ -1,0 +1,15 @@
+<div class="comments new-comment new-comment-main-popup">
+  <img
+    [src]="'../../assets/' + currentUser.image.png"
+    alt=""
+    id="new-comment-img"
+  />
+  <textarea
+    placeholder="Add a comment..."
+    class="current-comment-content"
+    [(ngModel)]="content"
+  ></textarea
+  ><button class="new-comment-send-btn" (click)="addNewCommentFn()">
+    SEND
+  </button>
+</div>

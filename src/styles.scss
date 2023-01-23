@@ -1,1 +1,273 @@
 /* You can add global styles to this file, and also import other style files */
+/* Global */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #e8dddd;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}
+
+textarea {
+  resize: none;
+}
+
+/* Main */
+.comments-wrapper {
+  margin: 0 auto;
+  max-width: 700px;
+  padding: 50px 10px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.comments {
+  background-color: white;
+  width: 100%;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.old-comment,
+.user-comment {
+  background-color: white;
+  width: 100%;
+  padding: 20px;
+  border-radius: 5px;
+  min-height: 100px;
+  margin: 10px 0;
+}
+
+.user-comments {
+  display: flex;
+  column-gap: 10px;
+  align-items: flex-start;
+}
+.old-comment-points {
+  background-color: rgb(244, 247, 247);
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.old-comment-points button,
+.old-comment-points div {
+  border: none;
+  padding: 1px 10px;
+  text-align: center;
+}
+
+.old-comment-points button {
+  font-size: 20px;
+  color: lightgray;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.old-comment-points .current-point {
+  font-weight: bold;
+  color: rgb(0, 2, 92);
+}
+
+.old-comment-points button:hover {
+  color: rgb(0, 2, 92);
+}
+
+.old-comment-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.old-comment-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.old-comment-info div {
+  margin-right: 15px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.old-comment-info img {
+  height: 100%;
+}
+
+.user-comment-delete-btn img,
+.user-comment-edit-btn img,
+.old-comment-reply-btn img {
+  margin-right: 10px;
+  vertical-align: bottom;
+}
+.user-comment-delete-btn {
+  margin-left: auto;
+  color: red;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.old-comment-new-reply {
+  margin-bottom: 10px;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.old-comment-date {
+  opacity: 0.6;
+}
+
+.old-comment-reply,
+.new-reply-on-old-reply {
+  width: 80%;
+  margin: 5px 0;
+  margin-left: auto;
+}
+
+.hide {
+  display: none;
+}
+
+.new-comment {
+  width: 100%;
+  height: 130px;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: 10px;
+}
+
+#new-comment-img {
+  width: 40px;
+}
+
+.current-comment-content,
+.reply-comment-content {
+  border-radius: 5px;
+  height: 100%;
+  flex-grow: 1;
+}
+
+.old-comment-info .user {
+  height: auto;
+  padding: 3px 5px;
+  border-radius: 2px;
+  background-color: rgb(61 61 158);
+  color: #fff;
+  display: inline-block;
+}
+
+.edit-textarea {
+  width: 100%;
+  height: 85px;
+  border-radius: 5px;
+}
+
+.delete-comment-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.delete-comment-modal-content {
+  padding: 25px;
+  background-color: #fff;
+  width: 315px;
+  display: inline-block;
+  border-radius: 10px;
+}
+
+.delete-comment-modal-content h2 {
+  margin: 0;
+}
+
+.delete-comment-modal-content p {
+  margin: 20px 0;
+}
+
+.modal-btns {
+  display: flex;
+}
+
+/* buttons */
+.new-comment-send-btn,
+#new-reply-send-btn,
+.update-comment-btn {
+  background-color: rgb(61 61 158);
+  padding: 10px 15px;
+  color: #fff;
+  border-radius: 3px 5px;
+}
+
+.new-comment-send-btn:hover,
+#new-reply-send-btn:hover,
+.update-comment-btn:hover,
+.old-comment-reply-btn:hover,
+.user-reply-btn:hover,
+.user-comment-delete-btn:hover,
+.user-comment-edit-btn:hover {
+  opacity: 0.4;
+}
+
+.update-comment-btn {
+  width: fit-content;
+  margin-left: auto;
+}
+
+.user-reply-width {
+  width: 80%;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.user-comment-edit-btn,
+.old-comment-reply-btn {
+  color: rgb(61 61 158);
+  font-weight: bold;
+}
+
+.old-comment-reply-btn {
+  margin-left: auto;
+}
+
+.modal-no-btn,
+.modal-yes-btn {
+  padding: 10px 20px;
+  color: #fff;
+  background-color: grey;
+  border-radius: 5px;
+}
+
+.modal-yes-btn {
+  background-color: rgba(255, 0, 0, 0.6);
+  margin-left: auto;
+}
+
+.hide {
+  display: none;
+}
