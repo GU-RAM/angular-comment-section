@@ -8,6 +8,7 @@ import { EditReplyComponent } from './comments/edit-reply/edit-reply.component';
 import { CommentsVotingComponent } from './comments/comments-voting/comments-voting.component';
 import { NewCommentComponent } from './new-comment/new-comment.component';
 import { NewReplyComponent } from './comments/new-reply/new-reply.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { NewReplyComponent } from './comments/new-reply/new-reply.component';
     NewCommentComponent,
     NewReplyComponent,
   ],
-  imports: [BrowserModule, FormsModule],
+  imports: [BrowserModule, FormsModule, CommonModule],
   providers: [],
   bootstrap: [AppComponent],
 })

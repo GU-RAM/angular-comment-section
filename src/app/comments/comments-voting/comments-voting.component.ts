@@ -9,9 +9,10 @@ import { Comment } from '../../app.component';
 export class CommentsVotingComponent {
   @Input() allComments: Comment[] = [];
   @Input() commentScore: number = 0;
-  @Output() addPoints = new EventEmitter();
-  @Output() minusPoints = new EventEmitter();
   @Input() id: number = 0;
+
+  @Output() minusPoints = new EventEmitter();
+  @Output() addPoints = new EventEmitter();
 
   increasePoints() {
     this.addPoints.emit(this.id);

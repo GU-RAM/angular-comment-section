@@ -20,6 +20,21 @@ export class CommentsComponent {
   id: number = 0;
   replyId: number = 0;
 
+  selectedReplyID = 0;
+
+  selectedReplyChange(reply: any) {
+    console.log(reply);
+    if (this.selectedReplyID === reply.id) {
+      this.selectedReplyID = 0;
+    } else {
+      this.selectedReplyID = reply.id;
+    }
+  }
+
+  handler(rep: any) {
+    console.log(rep);
+  }
+
   reply(index: number, id: number) {
     let foundComment = this.allComments.find(
       (comment) => id === comment.id && this.id !== index
@@ -31,21 +46,9 @@ export class CommentsComponent {
     }
   }
 
-  replyOnReplies(index: number, id: number) {
-    let foundComment = this.allComments.find(
-      (comment) => id === comment.id && this.replyId !== index
-    );
-
-    if (foundComment) {
-      this.replyId = index;
-      console.log(index);
-    } else if (this.replyId === index) {
-      this.replyId = 0;
-    }
-  }
-
   addNewReplyfn(reply: any) {
     this.addNewReply.emit(reply);
+    console.log(reply);
   }
 
   addPointsUser(id: number) {

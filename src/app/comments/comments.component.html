@@ -62,40 +62,40 @@
     ></app-new-reply>
 
     <div *ngIf="comment.replies.length > 0">
-      <div *ngFor="let replies of comment.replies; let i = index">
+      <div *ngFor="let reply of comment.replies; let i = index">
         <div
           class="old-comment old-comment-reply user-comments"
-          [attr.id]="replies.id"
+          [attr.id]="reply.id"
         >
           <app-comments-voting
             (addPoints)="addPointsUser($event)"
             (minusPoints)="decreasePoints($event)"
-            [id]="replies.id"
-            [commentScore]="replies.score"
+            [id]="reply.id"
+            [commentScore]="reply.score"
           ></app-comments-voting>
           <div class="old-comment-content">
             <div class="old-comment-info">
               <div class="old-comment-img">
-                <img [src]="'../../assets/' + replies.user.image.png" alt="" />
+                <img [src]="'../../assets/' + reply.user.image.png" alt="" />
               </div>
-              <div class="username">{{ replies.user.username }}</div>
+              <div class="username">{{ reply.user.username }}</div>
               <div
                 class="user"
-                *ngIf="currentUser.username === replies.user.username"
+                *ngIf="currentUser.username === reply.user.username"
               >
                 you
               </div>
-              <div class="old-comment-date">{{ replies.createdAt }}</div>
+              <div class="old-comment-date">{{ reply.createdAt }}</div>
               <button
                 class="old-comment-reply-btn"
-                (click)="replyOnReplies(i + 1, comment.id)"
-                *ngIf="currentUser.username !== replies.user.username"
+                (click)="selectedReplyChange(reply)"
+                *ngIf="currentUser.username !== reply.user.username"
               >
                 <img src="../../assets/images/icon-reply.svg" alt="" />Reply
               </button>
               <button
                 class="user-comment-delete-btn"
-                *ngIf="currentUser.username === replies.user.username"
+                *ngIf="currentUser.username === reply.user.username"
               >
                 <img
                   src="../../assets/images/icon-delete.svg"
@@ -104,7 +104,7 @@
               </button>
               <button
                 class="user-comment-edit-btn"
-                *ngIf="currentUser.username === replies.user.username"
+                *ngIf="currentUser.username === reply.user.username"
               >
                 <img
                   src="../../assets/images/icon-edit.svg"
@@ -112,25 +112,27 @@
                 />Edit
               </button>
             </div>
-            <!-- <app-edit-reply [content]="replies.content"></app-edit-reply> -->
+            <!-- <app-edit-reply [content]="reply.content"></app-edit-reply> -->
             <div class="old-comment-text">
-              {{ replies.replyingTo }}{{ replies.content }}
+              {{ reply.replyingTo }}{{ reply.content }}
             </div>
             <!-- <div class="old-comment-text">
               <textarea
                 class="edit-textarea"
-                [(ngModel)]="replies.content"
+                [(ngModel)]="reply.content"
               ></textarea>
             </div>
             <button class="update-comment-btn">UPDATE</button> -->
           </div>
         </div>
         <app-new-reply
-          *ngIf="i + 1 == replyId"
+          *ngIf="selectedReplyID == reply.id"
           (addNewReply)="addNewReplyfn($event)"
           [currentUser]="currentUser"
           [sumOfAllComments]="sumOfAllComments"
           [id]="comment.id"
+          [replyId]="reply.id"
+          (delete)="handler($event)"
         ></app-new-reply>
       </div>
     </div>

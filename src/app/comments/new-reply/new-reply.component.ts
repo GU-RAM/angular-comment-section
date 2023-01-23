@@ -12,8 +12,10 @@ export class NewReplyComponent {
   @Input() currentUser: User = data.currentUser;
   @Input() sumOfAllComments: number = 0;
   @Input() id: number = 0;
+  @Input() replyId: number = 0;
 
   @Output() addNewReply = new EventEmitter<any>();
+  @Output() delete = new EventEmitter<any>();
 
   content: string = '';
   createdAt: string = '1 minutes ago';
@@ -40,5 +42,6 @@ export class NewReplyComponent {
       });
       this.content = '';
     }
+    this.delete.emit(1);
   }
 }
