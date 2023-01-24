@@ -16,21 +16,23 @@ export class NewCommentComponent {
   score: number = 0;
 
   addNewCommentFn() {
-    this.addNewComment.emit({
-      id: this.sumOfAllComments,
-      content: this.content,
-      createdAt: this.createdAt,
-      score: this.score,
-      user: {
-        image: {
-          png: this.currentUser.image.png,
-          webp: this.currentUser.image.webp,
+    if (this.content) {
+      this.addNewComment.emit({
+        id: this.sumOfAllComments,
+        content: this.content,
+        createdAt: this.createdAt,
+        score: this.score,
+        user: {
+          image: {
+            png: this.currentUser.image.png,
+            webp: this.currentUser.image.webp,
+          },
+          username: this.currentUser.username,
         },
-        username: this.currentUser.username,
-      },
-      replies: [],
-    });
-    this.sumOfAllComments++;
-    this.content = '';
+        replies: [],
+      });
+      this.sumOfAllComments++;
+      this.content = '';
+    }
   }
 }

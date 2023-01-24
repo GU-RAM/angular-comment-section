@@ -100,7 +100,6 @@ export class AppComponent {
   }
 
   addChangedContentHandler(changhedContentId: any) {
-    console.log('mari');
     let comment: any;
     this.allComments.forEach((c: any) => {
       if (c.id === changhedContentId.id) {
@@ -116,6 +115,18 @@ export class AppComponent {
 
     comment.content = changhedContentId.content;
     this.updateLocalStorage();
+  }
+
+  deleteUserCommentHandler(id: any) {
+    this.allComments = this.allComments
+      .map((comment) => {
+        comment.replies = comment.replies.filter((reply) => reply.id !== id);
+        return comment;
+      })
+      .filter((comment) => comment.id !== id);
+
+    this.updateLocalStorage();
+    this.sumOfAllComments = this.sumAllComments();
   }
 
   getComments() {
@@ -137,7 +148,7 @@ export class AppComponent {
   sumAllComments() {
     return this.allComments.reduce(
       (total, comment) => total + comment.replies.length + 1,
-      1
+      0
     );
   }
 }

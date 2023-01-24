@@ -16,6 +16,7 @@ export class CommentsComponent {
   @Output() addPoints = new EventEmitter();
   @Output() decrease = new EventEmitter();
   @Output() changeContent = new EventEmitter();
+  @Output() deleteComment = new EventEmitter();
 
   nameToReply: string = '';
   id: number = 0;
@@ -64,6 +65,9 @@ export class CommentsComponent {
 
   addChangedContent(changedInfoId: any) {
     this.changeContent.emit(changedInfoId);
-    // this.edit(changedInfoId);
+  }
+
+  deleteUserComment(id: any) {
+    this.deleteComment.emit(id);
   }
 }

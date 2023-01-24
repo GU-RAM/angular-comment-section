@@ -32,15 +32,12 @@
           >
             <img src="../../assets/images/icon-reply.svg" alt="" />Reply
           </button>
-          <button
+          <app-delete-user-comment
             class="user-comment-delete-btn"
             *ngIf="currentUser.username === comment.user.username"
-          >
-            <img
-              src="../../assets/images/icon-delete.svg"
-              alt="Delete icon"
-            />Delete
-          </button>
+            [id]="comment.id"
+            (deleteUserComment)="deleteUserComment($event)"
+          ></app-delete-user-comment>
           <button
             class="user-comment-edit-btn"
             *ngIf="currentUser.username === comment.user.username"
@@ -106,15 +103,12 @@
               >
                 <img src="../../assets/images/icon-reply.svg" alt="" />Reply
               </button>
-              <button
+              <app-delete-user-comment
                 class="user-comment-delete-btn"
                 *ngIf="currentUser.username === reply.user.username"
-              >
-                <img
-                  src="../../assets/images/icon-delete.svg"
-                  alt="Delete icon"
-                />Delete
-              </button>
+                [id]="reply.id"
+                (deleteUserComment)="deleteUserComment($event)"
+              ></app-delete-user-comment>
               <button
                 class="user-comment-edit-btn"
                 *ngIf="currentUser.username === reply.user.username"
