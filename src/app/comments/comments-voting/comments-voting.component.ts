@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Comment } from '../../app.component';
+import { Comment } from '../../model';
 
 @Component({
   selector: 'app-comments-voting',

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { User } from '../../app.component';
+import { User } from '../../model';
 import data from '../../../assets/data/data.json';
 
 @Component({

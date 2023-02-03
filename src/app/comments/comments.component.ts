@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Comment, User } from '../app.component';
 import data from '../../assets/data/data.json';
+import { Comment, User } from '../model';
 
 @Component({
   selector: 'app-comments',
@@ -33,7 +33,7 @@ export class CommentsComponent {
   }
 
   reply(reply: any) {
-    let foundComment = this.allComments.find(
+    const foundComment = this.allComments.find(
       (comment) => reply.id === comment.id && this.id !== reply.index
     );
     if (foundComment) {

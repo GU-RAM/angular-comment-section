@@ -1,37 +1,6 @@
 import { Component } from '@angular/core';
 import data from '../assets/data/data.json';
-
-export interface Comment {
-  id: number;
-  content: string;
-  createdAt: string;
-  score: number;
-  user: {
-    image: {
-      png: string;
-      webp: string;
-    };
-    username: string;
-  };
-  replies: Replies[];
-}
-
-interface Replies {
-  id: number;
-  content: string;
-  createdAt: string;
-  score: number;
-  replyingTo: string;
-  user: User;
-}
-
-export interface User {
-  image: {
-    png: string;
-    webp: string;
-  };
-  username: string;
-}
+import { User, Comment } from './model';
 
 @Component({
   selector: 'app-root',
@@ -44,7 +13,7 @@ export class AppComponent {
   currentUser: User = data.currentUser;
   allComments: Comment[] = this.getComments();
   sumOfReplies: number = 0;
-  sumOfAllComments: any = this.sumAllComments();
+  sumOfAllComments: number = this.sumAllComments();
 
   addNewCommentHandler(newComment: Comment) {
     this.allComments.push(newComment);
@@ -148,7 +117,7 @@ export class AppComponent {
   sumAllComments() {
     return this.allComments.reduce(
       (total, comment) => total + comment.replies.length + 1,
-      0
+      1
     );
   }
 }
